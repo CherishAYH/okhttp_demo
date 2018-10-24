@@ -8,10 +8,12 @@ import android.view.View;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -37,39 +39,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.bt1:
-                OkHttpClient client2 = new OkHttpClient.Builder()
-                        .connectTimeout(3, TimeUnit.SECONDS)
-                        .retryOnConnectionFailure(false)
-                        .build();
-                OkHttpUtils.getInstance().setOkHttpClient(client2);
+
                 send(url);
 
                 break;
             case R.id.bt2:
-                OkHttpClient client = new OkHttpClient.Builder()
-                        .connectTimeout(10, TimeUnit.SECONDS)
-                        .retryOnConnectionFailure(false)
-                        .build();
-                OkHttpUtils.getInstance().setOkHttpClient(client);
+
                 send(url2);
                 break;
             case R.id.bt3:
 
-                OkHttpClient client1 = new OkHttpClient.Builder()
-                        .connectTimeout(20, TimeUnit.SECONDS)
-                        .retryOnConnectionFailure(false)
-                        .build();
-                OkHttpUtils.getInstance().setOkHttpClient(client1);
+
                 send(url);
 
                 break;
         }
     }
 
-    protected void send(String url) {
+    protected void send(final String url) {
         OkHttpUtils.get()
                 .url(url)
-                .tag(url)
+                .tag(this)
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -81,8 +71,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onResponse(String response, int id) {
                         response = response.replace("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>", "");
                         Log.e("response-----", response.toString());
-
                     }
                 });
+
+
+
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    Response response = OkHttpUtils.get()
+//                            .url(url)
+//                            .tag(url)
+//                            .build()
+//                            .execute();
+//
+//                    if (response != null){
+//                        Log.e("res", response.body().toString());
+//                    }
+//
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                    Log.e("IOException", e.toString());
+//                }
+//            }
+//        }).start();
     }
 }
