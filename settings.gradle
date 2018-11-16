@@ -1,1 +1,1 @@
-include ':app', ':okhttputils', ':camkit-966'
+include ':app', ':okhttputils', ':f1_kit'

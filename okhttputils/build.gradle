@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'//添加
 
 
 android {
@@ -29,13 +28,13 @@ dependencies {
     api 'com.squareup.okhttp3:okhttp:3.11.0'
 }
 
-//添加
-publish {
-    userOrg = 'werner'//bintray.com用户名
-    groupId = 'com.werner'//jcenter上的路径
-    artifactId = 'okhttputils'//项目名称
-    publishVersion = '1.0.0'//版本号
-    desc = 'okhttputils'//描述，不重要
-    website = 'https://github.com/WernerLuo/okhttp_demo'
-}
+//apply plugin: 'com.novoda.bintray-release'//添加
+//publish {
+//    userOrg = 'werner'//bintray.com用户名
+//    groupId = 'com.werner'//jcenter上的路径
+//    artifactId = 'okhttputils'//项目名称
+//    publishVersion = '1.0.0'//版本号
+//    desc = 'okhttputils'//描述，不重要
+//    website = 'https://github.com/WernerLuo/okhttp_demo'
+//}
 
